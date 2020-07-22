@@ -17,6 +17,7 @@ public class UserController {
     user - user
     admin - admin
     viewer - viewer
+    user0 - user0 enabled=0
      */
 
     private final UserService userService;
@@ -29,10 +30,10 @@ public class UserController {
     @ResponseBody
     public String createUser(){
         User user = new User();
-        user.setUserName("viewer");
-        user.setPassword("viewer");
+        user.setUserName("sAdmin");
+        user.setPassword("aAdmin");
         userService.saveUser(user);
-        return "viewer";
+        return "user0";
     }
 
     @GetMapping("/user-info")

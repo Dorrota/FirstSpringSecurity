@@ -7,7 +7,7 @@
 </head>
 <body>
 <h2>Ankiety</h2>
-<table>
+<table border="1 px solid black">
 <thead>
 <tr bgcolor="#ffd700">
     <th>Tytuł</th>

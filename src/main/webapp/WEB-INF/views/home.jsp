@@ -11,6 +11,10 @@
 
 <h4>Dla wszystkich.</h4>
 
+<div><sec:authorize access="hasRole('USER')">Text visible to user.</sec:authorize></div>
+<div><sec:authorize access="hasRole('ADMIN')">Text visible to admin.</sec:authorize></div>
+<div> <sec:authorize access="hasAnyRole('VIEWER')">Text visible only to viewer users.</sec:authorize>
+</div>
 
 <sec:authorize access="isAuthenticated()">
     <form action="<c:url value="/logout"/>" method="post">
@@ -19,7 +23,6 @@
     </form>
     <p>Posiada role: <sec:authentication property="authorities"/></p>
 </sec:authorize>
-
 
 </body>
 </html>

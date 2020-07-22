@@ -5,6 +5,8 @@ import com.ailleron.security.service.AnkietaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -24,5 +26,18 @@ public class AnkietaController {
         List<Ankieta> list = ankietaService.findAll();
         model.addAttribute("ankiety", list);
         return "ankieta";
+    }
+
+    @GetMapping("/add")
+    public String addAnkieta(Model model){
+        model.addAttribute("ankieta", new Ankieta());
+        return "ankietaForm";
+    }
+
+    @PostMapping("/add")
+    public String saveAnkieta(@ModelAttribute Ankieta ankieta){
+        ankietaService.addAnkieta(ankieta);
+        return "redirect:/ankieta/all";
+
     }
 }
