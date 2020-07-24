@@ -28,7 +28,9 @@ public class RoleController {
         Set<Privilege> privileges = new HashSet<>();
         privileges.add(privilegeService.findPrivilegeByName("ANK_PUBLISH_SPACE_PRIVILEGE"));
         privileges.add(privilegeService.findPrivilegeByName("ANK_MNG_PRIVILEGE"));
-        Role role = roleService.findRoleByName("ROLE_USER");
+        privileges.add(privilegeService.findPrivilegeByName("ANK_PUBLISH_GLOBAL_PRIVILEGE"));
+        privileges.add(privilegeService.findPrivilegeByName("USER_MANAGE_PRIVILEGE"));
+        Role role = roleService.findRoleByName("ROLE_ADMIN");
         role.setPrivileges(privileges);
         roleService.saveRole(role);
         return "Done";

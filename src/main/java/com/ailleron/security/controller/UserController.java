@@ -1,9 +1,12 @@
 package com.ailleron.security.controller;
 
+import com.ailleron.security.domain.CurrentUser;
 import com.ailleron.security.domain.User;
 import com.ailleron.security.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +21,7 @@ public class UserController {
     admin - admin
     viewer - viewer
     user0 - user0 enabled=0
+    sAdmin - aAdmin
      */
 
     private final UserService userService;
@@ -38,8 +42,15 @@ public class UserController {
 
     @GetMapping("/user-info")
     @ResponseBody
-    public String userInfo(@AuthenticationPrincipal UserDetails customUser){
+    public String userInfo(@AuthenticationPrincipal CurrentUser customUser){
         log.info("customUser class {} " , customUser.getClass());
+        log.info("custom user authorities {} ", customUser.getAuthorities());
         return "You are logged as " + customUser;
+    }
+    @GetMapping("/authentication")
+    @ResponseBody
+    public Object getAuthentication(@CurrentSecurityContext(expression = "authentication")
+                                            Authentication authentication) {
+        return authentication.getDetails();
     }
 }
